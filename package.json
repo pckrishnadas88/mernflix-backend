@@ -12,6 +12,10 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "mongodb": "^5.0.1",
+    "mongoose": "^6.9.2",
+    "mongoose-bcrypt": "^1.10.1",
+    "mongoose-string-query": "^0.2.7",
+    "mongoose-timestamp": "^0.6.0",
     "morgan": "~1.9.1"
   }
 }
