@@ -1,16 +1,17 @@
 var express = require('express');
-var User = require("../models/userModel")
+var Movie = require("../models/movieModel")
 var router = express.Router();
 
-/* GET users listing. */
+/* GET movies listing. */
 router.get('/',function(req, res, next) {
   const query = req.query || {};
 
-	User.apiQuery(query)
+  Movie.apiQuery(query)
 		// limit the information returned (server side) – e.g. no password
-		.select('name email username')
-		.then(users => {
-			res.json(users);
+		.select('title description url category createdAt createdBy')
+        .sort( { createdAt: -1 } )
+		.then(movies => {
+			res.json(movies);
 		})
 		.catch(err => {
 			logger.error(err);
@@ -22,9 +23,9 @@ router.post('/', async function(req, res, next){
   // create a user
   try {
     const data = Object.assign({}, req.body) || {};
-    const user = new User(data);
-    await user.save()
-    res.json(user)
+    const movie = new Movie(data);
+    await movie.save()
+    res.json(movie)
   } catch(err) {
     //console.log(err.name)
     if(err.name == 'ValidationError') {
